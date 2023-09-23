@@ -13,14 +13,13 @@ using System.Text;
 
 namespace WebAddressbookTests
 {
-    public class NavigationHelper
+    public class NavigationHelper : HelperBase
     {
-        private IWebDriver driver;
+        
         private string baseURL;
 
-        public NavigationHelper(IWebDriver driver, string baseURL)
+        public NavigationHelper(ApplicationManager manager, string baseURL) : base(manager)
         {
-            this.driver = driver;
             this.baseURL = baseURL;
         }
         public void GoToGroupPage()

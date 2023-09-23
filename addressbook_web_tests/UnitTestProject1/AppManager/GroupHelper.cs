@@ -11,26 +11,39 @@ using System.Text;
 
 namespace WebAddressbookTests
 {
-    public class GroupHelper
+    public class GroupHelper : HelperBase
     {
-        private IWebDriver driver;
-
-        public GroupHelper(IWebDriver driver)
+       
+        public GroupHelper(ApplicationManager manager) : base(manager)
         {
-            this.driver = driver;
         }
-        public void ReturntoGroupPage()
+
+        public GroupHelper Create(GroupData group)
+        {
+            manager.Navigator.GoToGroupPage();
+            InitGroupCreation();
+            FillingGroupPage(group);
+            SubmitGroupCreation();
+            ReturntoGroupPage();
+            Exit();
+
+            return this;
+
+        }
+        public GroupHelper ReturntoGroupPage()
         {
 
             driver.FindElement(By.LinkText("group page")).Click();
             driver.FindElement(By.LinkText("home")).Click();
+            return this;
         }
-        public void SubmitGroupCreation()
+        public GroupHelper SubmitGroupCreation()
         {
 
             driver.FindElement(By.Name("submit")).Click();
+            return this;
         }
-        public void FillingGroupPage(GroupData group)
+        public GroupHelper FillingGroupPage(GroupData group)
         {
             driver.FindElement(By.Name("group_header")).Click();
             driver.FindElement(By.Name("group_header")).Clear();
@@ -41,23 +54,28 @@ namespace WebAddressbookTests
             driver.FindElement(By.Name("group_name")).Click();
             driver.FindElement(By.Name("group_name")).Clear();
             driver.FindElement(By.Name("group_name")).SendKeys(group.Footer);
+            return this;
         }
-        public void InitGroupCreation()
+        public GroupHelper InitGroupCreation()
         {
 
             driver.FindElement(By.Name("new")).Click();
+            return this;
         }
-        public void RemoveGroup()
+        public GroupHelper RemoveGroup()
         {
             driver.FindElement(By.XPath("//input[5]")).Click();
+            return this;
         }
-        public void Exit()
+        public GroupHelper Exit()
         {
             driver.FindElement(By.LinkText("Logout")).Click();
+            return this;
         }
-        public void SelectGroup(int index)
+        public GroupHelper SelectGroup(int index)
         {
             driver.FindElement(By.XPath("//span[" + index + "]/input")).Click();
+            return this;
         }
     }
 }
