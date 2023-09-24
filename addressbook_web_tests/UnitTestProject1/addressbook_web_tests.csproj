@@ -94,6 +94,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppManager\ContactHelper.cs" />
+    <Compile Include="Tests\ContactCreationTest.cs" />
+    <Compile Include="Tests\GroupModificationTests.cs" />
     <Compile Include="Model\AccountData.cs" />
     <Compile Include="AppManager\ApplicationManager.cs" />
     <Compile Include="Model\ContactData.cs" />
@@ -106,6 +109,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tests\GroupCreationTest.cs" />
     <Compile Include="Tests\GroupRemovalTest.cs" />
+    <Compile Include="Tests\ContactRemovalTest.cs" />
+    <Compile Include="Tests\ContactModificationTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\.editorconfig">

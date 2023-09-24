@@ -17,7 +17,6 @@ namespace WebAddressbookTests
             group.Footer = "g";
 
             app.Group.Create(group);
-            Console.WriteLine(group.Header);
         }
         [Test]
         public void EmptyGroupCreationTest()
