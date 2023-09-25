@@ -49,7 +49,7 @@ namespace WebAddressbookTests
         }
         public ContactHelper SelectContact(int index)
         {
-            driver.FindElement(By.Id(index.ToString())).Click();
+            driver.FindElement(By.XPath("//*[@id='maintable']/tbody/tr["+index+"]/td[1]/input")).Click();
             return this;
         }
         public ContactHelper RemoveContact()

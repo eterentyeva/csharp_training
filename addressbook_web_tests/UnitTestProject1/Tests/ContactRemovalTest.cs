@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using System.Threading;
 
 namespace WebAddressbookTests
 {
@@ -9,9 +10,9 @@ namespace WebAddressbookTests
         public void ContactRemovalTest()
         {
             app.Contact
-                .SelectContact(6)
+                .SelectContact(2)
                 .RemoveContact()
-                .Exit();
+                .Exit(); 
         }
     }
 }
