@@ -30,12 +30,8 @@ namespace WebAddressbookTests
 
         private void FillingContactPage(ContactData contactData)
         {
-            driver.FindElement(By.Name("firstname")).Click();
-            driver.FindElement(By.Name("firstname")).Clear();
-            driver.FindElement(By.Name("firstname")).SendKeys(contactData.Firstname);
-            driver.FindElement(By.Name("lastname")).Click();
-            driver.FindElement(By.Name("lastname")).Clear();
-            driver.FindElement(By.Name("lastname")).SendKeys(contactData.Lastname);
+            Type(By.Name("firstname"), contactData.Firstname);
+            Type(By.Name("lastname"), contactData.Lastname);
         }
 
         private void AddingNewContact()
@@ -100,5 +96,9 @@ namespace WebAddressbookTests
             return this;
         }
 
+        public bool IsContactExist()
+        {
+            return IsElementPresent(By.Name("entry"));
+        }
     }
 }

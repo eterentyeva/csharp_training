@@ -1,6 +1,7 @@
 ﻿using OpenQA.Selenium;
 using System;
 using OpenQA.Selenium.Chrome;
+using System.Threading;
 
 namespace WebAddressbookTests
 {
@@ -11,24 +12,25 @@ namespace WebAddressbookTests
         protected GroupHelper groupHelper;
         protected ContactHelper contactHelper;
 
+        private static ThreadLocal<ApplicationManager> app = new ThreadLocal<ApplicationManager>();
+
         protected IWebDriver driver;
         protected string baseURL;
 
         public IWebDriver Driver 
-        { get
-            {  return driver; }
+        { 
+            get {  return driver; }
             set {  driver = value; }     
         }
-        public void Stop()
+        public static ApplicationManager GetInstance()
         {
-            try
+            if (!app.IsValueCreated)
             {
-                driver.Quit();
+                ApplicationManager newInstance = new ApplicationManager();
+                newInstance.Navigator.OpenHomePage();
+                app.Value = newInstance;
             }
-            catch (Exception)
-            {
-                // Ignore errors if unable to close the browser
-            }
+            return app.Value;
         }
 
         public ApplicationManager()
@@ -41,6 +43,19 @@ namespace WebAddressbookTests
             groupHelper = new GroupHelper(this);
             contactHelper = new ContactHelper(this);
         }
+
+        ~ApplicationManager()
+        {
+            try
+            {
+                driver.Quit();
+            }
+            catch (Exception)
+            {
+                // Ignore errors if unable to close the browser
+            }
+        }
+
         public LoginHelper Auth
         { get { return loginHelper; } } 
         public NavigationHelper Navigator

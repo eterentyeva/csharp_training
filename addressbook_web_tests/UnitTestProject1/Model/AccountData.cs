@@ -15,7 +15,7 @@ namespace WebAddressbookTests
         {
             this.username = username;
             this.password = password;
-          
+
         }
 
         public string Username

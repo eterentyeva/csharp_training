@@ -4,20 +4,21 @@ using System;
 namespace WebAddressbookTests
 {
     [TestFixture]
-    public class ContactCreationTests : TestBase
+    public class ContactCreationTests : AuthTestBase
     {
         [Test]
         public void ContactCreationTest()
         {
-            Console.WriteLine(app.Contact);
             ContactData contact = new ContactData("liza", "ter");
             app.Contact.Create(contact);
+            app.Auth.Logout();
         }
         [Test]
-        public void EmptyGroupCreationTest()
+        public void EmptyContactCreationTest()
         {
             ContactData contact = new ContactData("", "");
             app.Contact.Create(contact);
+            app.Auth.Logout();
         }
     }
 }
