@@ -1,10 +1,13 @@
 ﻿using OpenQA.Selenium;
 using System.Text.RegularExpressions;
 using NUnit.Framework;
+using System.Collections.Generic;
+
 namespace WebAddressbookTests
 {
     public class ContactHelper: HelperBase
     {
+        private List<ContactData> contactCashe = null;
         public ContactHelper(ApplicationManager manager) : base(manager)
         {
         }
@@ -46,12 +49,14 @@ namespace WebAddressbookTests
         public ContactHelper SelectContact(int index)
         {
             driver.FindElement(By.XPath("//*[@id='maintable']/tbody/tr["+index+"]/td[1]/input")).Click();
+            contactCashe = null;
             return this;
         }
         public ContactHelper RemoveContact()
         {
             driver.FindElement(By.XPath("//input[@value='Delete']")).Click();
             Assert.IsTrue(Regex.IsMatch(CloseAlertAndGetItsText(), "^Delete 1 addresses[\\s\\S]$"));
+            contactCashe = null;
 
             return this;
         }
@@ -75,12 +80,16 @@ namespace WebAddressbookTests
             FillingContactPage(newData);
             SubmitContactModification();
             ReturnToHomePage();
+
+            contactCashe = null;
+
             return this;
         }
 
         private ContactHelper InitContactModification()
         {
             driver.FindElement(By.XPath("//img[@alt='Edit']")).Click();
+            contactCashe = null;
             return this;
         }
 
@@ -100,5 +109,22 @@ namespace WebAddressbookTests
         {
             return IsElementPresent(By.Name("entry"));
         }
+        public List<ContactData> GetContactList()
+        {
+            if (contactCashe == null)
+            {
+                contactCashe = new List<ContactData>();
+                manager.Navigator.OpenHomePage();
+                ICollection<IWebElement> entries = driver.FindElements(By.Name("entry"));
+                foreach (IWebElement entry in entries)
+                {
+                    string firstName = entry.FindElements(By.TagName("td"))[2].Text;
+                    string lastName = entry.FindElements(By.TagName("td"))[1].Text;
+                    contactCashe.Add(new ContactData(firstName, lastName));
+                }
+            }
+            return new List<ContactData>(contactCashe);
+        }
     }
+    
 }

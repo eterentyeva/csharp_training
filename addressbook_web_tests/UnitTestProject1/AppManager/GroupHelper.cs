@@ -13,7 +13,7 @@ namespace WebAddressbookTests
 {
     public class GroupHelper : HelperBase
     {
-       
+        private List<GroupData> groupCashe = null;
         public GroupHelper(ApplicationManager manager) : base(manager)
         {
         }
@@ -40,24 +40,20 @@ namespace WebAddressbookTests
             return this;
         }
 
-        
-
         public GroupHelper ReturntoGroupPage()
         {
-
             driver.FindElement(By.LinkText("group page")).Click();
             driver.FindElement(By.LinkText("home")).Click();
             return this;
         }
         public GroupHelper SubmitGroupCreation()
         {
-
             driver.FindElement(By.Name("submit")).Click();
+            groupCashe = null;
             return this;
         }
         public GroupHelper FillingGroupPage(GroupData group)
         {
-            
             Type(By.Name("group_name"), group.Name);
             Type(By.Name("group_header"), group.Header);
             Type(By.Name("group_footer"), group.Footer);
@@ -77,6 +73,7 @@ namespace WebAddressbookTests
         public GroupHelper RemoveGroup()
         {
             driver.FindElement(By.XPath("//input[5]")).Click();
+            groupCashe = null;
             return this;
         }
         public GroupHelper Exit()
@@ -86,20 +83,49 @@ namespace WebAddressbookTests
         }
         public GroupHelper SelectGroup(int index)
         {
-            driver.FindElement(By.XPath("//span[" + index + "]/input")).Click();
+            driver.FindElement(By.XPath("//span[" + (index+1) + "]/input")).Click();
+            groupCashe = null;
             return this;
         }
         public GroupHelper SubmitGroupModification()
         {
             driver.FindElement(By.Name("update")).Click();
+            groupCashe = null;
             return this;
         }
 
         public GroupHelper InitGroupModification()
         {
             driver.FindElement(By.Name("edit")).Click();
+            groupCashe = null;
             return this;
         }
 
+        public List<GroupData> GetGroupList()
+        {
+            if (groupCashe == null)
+            {
+                manager.Navigator.GoToGroupPage();
+
+                groupCashe = new List<GroupData>();
+                ICollection<IWebElement> elems = driver.FindElements(By.CssSelector("span.group"));
+
+                foreach (IWebElement elem in elems)
+                {
+                    groupCashe.Add(new GroupData(elem.Text)
+                    {
+                        Id = elem.FindElement(By.TagName("input")).GetAttribute("value")
+                    });
+                }
+            }
+
+            return new List<GroupData>(groupCashe);
+        }
+
+        public int GetGroupCount()
+        {
+            manager.Navigator.GoToGroupPage();
+            return driver.FindElements(By.CssSelector("span.group")).Count;
+        }
     }
 }
