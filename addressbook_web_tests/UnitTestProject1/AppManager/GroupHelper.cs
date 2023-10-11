@@ -112,10 +112,21 @@ namespace WebAddressbookTests
 
                 foreach (IWebElement elem in elems)
                 {
-                    groupCashe.Add(new GroupData(elem.Text)
+                    groupCashe.Add(new GroupData(null)
                     {
                         Id = elem.FindElement(By.TagName("input")).GetAttribute("value")
                     });
+                }
+                string allGroupNames = driver.FindElement(By.CssSelector("div#content form")).Text;
+                string[] parts = allGroupNames.Split('\n');
+                int shift = groupCashe.Count - parts.Length;
+                for (int i = 0; i < groupCashe.Count; i++)
+                {
+                    if (i < shift)
+                        groupCashe[i].Name = "";
+                    else
+                        groupCashe[i].Name = parts[i - shift].Trim();
+                    
                 }
             }
 

@@ -97,6 +97,7 @@
     <Compile Include="AppManager\ContactHelper.cs" />
     <Compile Include="Tests\AuthTestBase.cs" />
     <Compile Include="Tests\ContactCreationTest.cs" />
+    <Compile Include="Tests\ContactInformationTest.cs" />
     <Compile Include="Tests\GroupModificationTests.cs" />
     <Compile Include="Model\AccountData.cs" />
     <Compile Include="AppManager\ApplicationManager.cs" />
@@ -107,6 +108,7 @@
     <Compile Include="AppManager\LoginHelper.cs" />
     <Compile Include="AppManager\NavigationHelper.cs" />
     <Compile Include="Tests\LoginTests.cs" />
+    <Compile Include="Tests\SearchTest.cs" />
     <Compile Include="Tests\TestBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tests\GroupCreationTest.cs" />
