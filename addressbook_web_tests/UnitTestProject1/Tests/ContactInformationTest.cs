@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Web;
 using NUnit.Framework;
 
 namespace WebAddressbookTests
@@ -24,6 +25,16 @@ namespace WebAddressbookTests
             string reverseDataFromTable = app.Contact.ReverseContactInformationGromTable(0);
             string reverseDataFromForm = app.Contact.ReverseGetContactInformationFromEditForm(0);
             Assert.AreEqual(reverseDataFromTable, reverseDataFromForm);
+        }
+
+        [Test]
+        public void TestReverseContactInformationFromDetailsForm() 
+        {
+            string reverseDataFromDetails = app.Contact.ReverseGetContactInformationFromDetailsForm(0);
+            string reverseDataFromForm = app.Contact.ReverseGetContactInformationFromEditFormForDetails(0);
+            Console.WriteLine(reverseDataFromDetails);
+            Console.WriteLine(reverseDataFromForm);
+            Assert.AreEqual(reverseDataFromDetails, reverseDataFromForm);
         }
     }
 }

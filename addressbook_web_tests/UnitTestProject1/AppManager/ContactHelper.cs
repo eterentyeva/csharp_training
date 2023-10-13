@@ -147,7 +147,7 @@ namespace WebAddressbookTests
         {
             manager.Navigator.OpenHomePage();
             string contactData = driver.FindElements(By.Name("entry"))[index].Text;
-            return Regex.Replace(contactData, "[ ]", "");
+            return Regex.Replace(contactData, @"[\r\n ]", "");
         }
 
         public ContactData GetContactInformationFromEditForm(int index)
@@ -168,11 +168,18 @@ namespace WebAddressbookTests
                 WorkPhone = workPhone
             };
         }
-
         public string ReverseGetContactInformationFromEditForm(int index)
         {
             ContactData contactDatas = GetContactInformationFromEditForm(index);
-            return contactDatas.LastName + contactDatas.FirstName + contactDatas.AllPhones;
+            string result = contactDatas.LastName + contactDatas.FirstName + contactDatas.AllPhones;
+            return Regex.Replace(result, @"[\r\n]", "");
+        }
+
+        public string ReverseGetContactInformationFromEditFormForDetails(int index)
+        {
+            ContactData contactDatas = GetContactInformationFromEditForm(index);
+            string result =  contactDatas.FirstName + contactDatas.LastName + contactDatas.AllPhones;
+            return Regex.Replace(result, @"[\r\n]", "");
         }
         public int GetNumberOfSearchResults()
         {
@@ -180,6 +187,14 @@ namespace WebAddressbookTests
             string text = driver.FindElement(By.TagName("label")).Text;
             Match m = new Regex(@"\d+").Match(text);
             return Int32.Parse(m.Value);
+        }
+
+       public string ReverseGetContactInformationFromDetailsForm(int index)
+        {
+            manager.Navigator.OpenHomePage();
+            driver.FindElement(By.XPath("(//img[@alt='Details'])[" + (index + 1) + "]")).Click();
+            IWebElement contactData = driver.FindElement(By.Id("content"));
+            return Regex.Replace(contactData.Text, @"[\r\n HWM:()\\-]", "");
         }
     }
 
