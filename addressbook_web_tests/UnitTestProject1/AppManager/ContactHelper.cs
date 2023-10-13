@@ -143,6 +143,13 @@ namespace WebAddressbookTests
             };
         }
 
+        public string ReverseContactInformationGromTable(int index)
+        {
+            manager.Navigator.OpenHomePage();
+            string contactData = driver.FindElements(By.Name("entry"))[index].Text;
+            return Regex.Replace(contactData, "[ ]", "");
+        }
+
         public ContactData GetContactInformationFromEditForm(int index)
         {
             manager.Navigator.OpenHomePage();
@@ -160,6 +167,12 @@ namespace WebAddressbookTests
                 MobilePhone = mobilePhone,
                 WorkPhone = workPhone
             };
+        }
+
+        public string ReverseGetContactInformationFromEditForm(int index)
+        {
+            ContactData contactDatas = GetContactInformationFromEditForm(index);
+            return contactDatas.LastName + contactDatas.FirstName + contactDatas.AllPhones;
         }
         public int GetNumberOfSearchResults()
         {

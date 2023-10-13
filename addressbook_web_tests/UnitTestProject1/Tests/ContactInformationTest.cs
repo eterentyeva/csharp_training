@@ -17,5 +17,13 @@ namespace WebAddressbookTests
             Assert.AreEqual(fromTable.Address, fromForm.Address);
             Assert.AreEqual(fromTable.AllPhones, fromForm.AllPhones);
         }
+
+        [Test]
+        public void TestReverseContactInformation()
+        {
+            string reverseDataFromTable = app.Contact.ReverseContactInformationGromTable(0);
+            string reverseDataFromForm = app.Contact.ReverseGetContactInformationFromEditForm(0);
+            Assert.AreEqual(reverseDataFromTable, reverseDataFromForm);
+        }
     }
 }
