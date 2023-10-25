@@ -396,3 +396,8 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+/addressbook_web_tests/UnitTestProject1/contact.json
+/addressbook_web_tests/UnitTestProject1/groups.csv
+/addressbook_web_tests/UnitTestProject1/groups.json
+/addressbook_web_tests/UnitTestProject1/groups.xlsx
+/addressbook_web_tests/UnitTestProject1/groups.xml
