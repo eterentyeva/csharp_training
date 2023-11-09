@@ -4,6 +4,8 @@ using NUnit.Framework;
 using System.Collections.Generic;
 using System;
 using System.Reflection;
+using OpenQA.Selenium.Support.UI;
+using System.Linq;
 
 namespace WebAddressbookTests
 {
@@ -195,6 +197,39 @@ namespace WebAddressbookTests
             driver.FindElement(By.XPath("(//img[@alt='Details'])[" + (index + 1) + "]")).Click();
             IWebElement contactData = driver.FindElement(By.Id("content"));
             return Regex.Replace(contactData.Text, @"[\r\n HWM:()\\-]", "");
+        }
+
+        public void AddContactToGroup(ContactData contact, GroupData group)
+        {
+            manager.Navigator.OpenHomePage();
+            ClearGroupFilter();
+            SelectContact(contact.Id);
+            SelectGroupToAdd(group.Name);
+            CommitAddingContactToGroup();
+            new WebDriverWait(driver, TimeSpan.FromSeconds(10)).
+                Until(d => d.FindElements(By.CssSelector("div.msgbox")).Count() > 0);
+        }
+        private void ClearGroupFilter()
+        {
+            new SelectElement(driver.FindElement(By.Name("group"))).SelectByText("[all]");
+        }
+        public void SelectGroupToAdd(string name)
+        {
+            new SelectElement(driver.FindElement(By.Name("to_group"))).SelectByText(name);
+        }
+        public void CommitAddingContactToGroup()
+        {
+            driver.FindElement(By.Name("add")).Click();
+        }
+        public ContactHelper SelectContact(string id)
+        {
+            driver.FindElement(By.Id(id)).Click();
+            return this;
+        }
+        public int GetContactCount()
+        {
+            manager.Navigator.OpenHomePage();
+            return driver.FindElements(By.Name("entry")).Count;
         }
     }
 

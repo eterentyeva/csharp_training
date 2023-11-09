@@ -4,11 +4,12 @@ using System.IO;
 using System.Xml.Serialization;
 using Newtonsoft.Json;
 using NUnit.Framework;
+using System;
 
 namespace WebAddressbookTests
 {
     [TestFixture]
-    public class GroupCreationTests : AuthTestBase
+    public class GroupCreationTests : GroupTestBase
     {
         public static IEnumerable<GroupData> RandomGroupDataProvider()
         {
@@ -35,7 +36,6 @@ namespace WebAddressbookTests
                     Header = parts[1],
                     Footer = parts[2]
                 });
-
             }
             return groups;
         }
@@ -70,23 +70,20 @@ namespace WebAddressbookTests
             return groups;
         }
 
-        [Test, TestCaseSource("GroupDataFromExcel")]
+        [Test, TestCaseSource("GroupDataFromCSVFile")]
         public void GroupCreationTest(GroupData group)
         {
-            List<GroupData> oldGroups = app.Group.GetGroupList();
+            List<GroupData> oldGroups = GroupData.GetAll();
 
             app.Group.Create(group);
 
             Assert.AreEqual(oldGroups.Count + 1, app.Group.GetGroupCount());
 
-            List<GroupData> newGroups = app.Group.GetGroupList();
+            List<GroupData> newGroups = GroupData.GetAll();
             oldGroups.Add(group);
             oldGroups.Sort();
             newGroups.Sort();
             Assert.AreEqual(oldGroups, newGroups);
-
-            app.Auth.Logout();
-
         }
 
         [Test]
@@ -109,6 +106,13 @@ namespace WebAddressbookTests
             app.Auth.Logout();
         }
 
-
+        [Test]
+        public void TestDBConnectivity()
+        {
+            foreach (ContactData contact in ContactData.GetAll())
+            {
+                Console.WriteLine(contact.Deprecated);
+            }
+        }
     }
 }

@@ -1,8 +1,10 @@
-﻿using Newtonsoft.Json;
+﻿using LinqToDB.Tools;
+using Newtonsoft.Json;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Security.Cryptography;
 using System.Xml.Serialization;
 
 namespace WebAddressbookTests
@@ -35,7 +37,19 @@ namespace WebAddressbookTests
         [Test, TestCaseSource("ContactDataFromJson")]
         public void ContactCreationTest(ContactData contact)
         {
+            List<ContactData> oldContacts = ContactData.GetAll();
+            
             app.Contact.Create(contact);
+
+            Assert.AreEqual(oldContacts.Count + 1, app.Contact.GetContactCount());
+
+            List<ContactData> newContacts = ContactData.GetAll();
+
+            oldContacts.Add(contact);
+            oldContacts.Sort();
+            newContacts.Sort();
+            
+            Assert.AreEqual(oldContacts, newContacts);
             app.Auth.Logout();
         }
     }
