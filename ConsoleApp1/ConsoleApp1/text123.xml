@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfFigure xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Figure>
+    <Title>desadesdesdew</Title>
+    <Height>4</Height>
+    <Width>6</Width>
+  </Figure>
+  <Figure>
+    <Title>ewd</Title>
+    <Height>1</Height>
+    <Width>2</Width>
+  </Figure>
+</ArrayOfFigure>

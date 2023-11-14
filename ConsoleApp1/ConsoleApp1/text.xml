@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+   <Figure>
+      <Height>5</Height>
+      <Title>John</Title>
+      <Width>6</Width>
+   </Figure>
+   <Figure>
+      <Height>5</Height>
+      <Title>John</Title>
+      <Width>6</Width>
+   </Figure>
+   <Figure>
+      <Height>5</Height>
+      <Title>John</Title>
+      <Width>6</Width>
+   </Figure>
+</root>
