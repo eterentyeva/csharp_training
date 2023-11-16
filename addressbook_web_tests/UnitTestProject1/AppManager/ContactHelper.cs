@@ -147,7 +147,7 @@ namespace WebAddressbookTests
         {
             manager.Navigator.OpenHomePage();
             string contactData = driver.FindElements(By.Name("entry"))[index].Text;
-            return Regex.Replace(contactData, @"[\r\n ]", "");
+            return Regex.Replace(contactData, @"[ ]", "");
         }
 
         public ContactData GetContactInformationFromEditForm(int index)
@@ -172,14 +172,14 @@ namespace WebAddressbookTests
         {
             ContactData contactDatas = GetContactInformationFromEditForm(index);
             string result = contactDatas.LastName + contactDatas.FirstName + contactDatas.AllPhones;
-            return Regex.Replace(result, @"[\r\n]", "");
+            return Regex.Replace(result, @"[ ]", "");
         }
 
         public string ReverseGetContactInformationFromEditFormForDetails(int index)
         {
             ContactData contactDatas = GetContactInformationFromEditForm(index);
             string result =  contactDatas.FirstName + contactDatas.LastName + contactDatas.AllPhones;
-            return Regex.Replace(result, @"[\r\n]", "");
+            return Regex.Replace(result, @"[ ]", "");
         }
         public int GetNumberOfSearchResults()
         {
@@ -194,7 +194,7 @@ namespace WebAddressbookTests
             manager.Navigator.OpenHomePage();
             driver.FindElement(By.XPath("(//img[@alt='Details'])[" + (index + 1) + "]")).Click();
             IWebElement contactData = driver.FindElement(By.Id("content"));
-            return Regex.Replace(contactData.Text, @"[\r\n HWM:()\\-]", "");
+            return Regex.Replace(contactData.Text, @"[ ]", "");
         }
     }
 
