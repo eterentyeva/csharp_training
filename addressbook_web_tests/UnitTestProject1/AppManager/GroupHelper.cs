@@ -154,5 +154,14 @@ namespace WebAddressbookTests
             ReturntoGroupPage();
             return this;
         }
+        public void GroupExistenceCheck()
+        {
+            manager.Navigator.GoToGroupPage();
+            if (!IsGroupExist())
+            {
+                GroupData group = new GroupData("AutoName", "AutoHeader", "AutoFooter");
+                Create(group);
+            }
+        }
     }
 }

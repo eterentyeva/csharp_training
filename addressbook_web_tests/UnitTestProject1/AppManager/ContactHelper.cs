@@ -247,6 +247,25 @@ namespace WebAddressbookTests
         {
             driver.FindElement(By.Name("remove")).Click();
         }
+        public void ContactExistanceCheck()
+        {
+            manager.Navigator.OpenHomePage();
+            if (!IsContactExist())
+            {
+                ContactData contact = new ContactData("AutoFirstName", "AutoLastName");
+                Create(contact);
+            }
+
+        }
+        public void ContactInGroupCheck(GroupData group)
+        {
+            manager.Navigator.OpenHomePage();
+            if (group.GetContacts().Count() == 0)
+            {
+                ContactData contact = ContactData.GetAll()[0];
+                AddContactToGroup(contact, group);
+            }
+        }
     }
 
 }
