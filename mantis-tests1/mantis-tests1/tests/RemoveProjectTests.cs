@@ -13,14 +13,19 @@ namespace mantis_tests
         [Test]
         public void RemoveProject()
         {
-            var accountData = new AccountData { Name = "administrator", Password = "root2" };
-            app.Login.Login(accountData);
-            app.ManagementMenu.GoToManagePage();
-            app.Project.GoToProjectPage();
-
-            app.Project.Remove();
-
-            app.Login.LogOut();
+            AccountData account = new AccountData()
+            {
+                Name = "administrator",
+                Password = "root"
+            };
+            app.Login.Login(account);
+            app.ManagementMenu.MenuProjects();
+            app.Project.ProjectExistanceCheck(account);
+            List<ProjectData> oldProjects = app.API.GetProjects(account);
+            app.Project.DeleteProject(account, 0);
+            List<ProjectData> newProjects = app.API.GetProjects(account);
+            oldProjects.RemoveAt(0);
+            Assert.AreEqual(oldProjects, newProjects);
         }
 
     }

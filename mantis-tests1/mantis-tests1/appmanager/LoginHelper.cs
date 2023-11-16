@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium;
+using System;
 
 namespace mantis_tests
 {
@@ -41,6 +42,15 @@ namespace mantis_tests
         private void OpenMainPage()
         {
             driver.Url = "http://localhost:8080/mantisbt-2.24.3/login_page.php";
+        }
+
+        public void LoginAsAdministrator()
+        {
+            Login(new AccountData()
+            {
+                Name = "administrator",
+                Password = "root"
+            });
         }
     }
 }

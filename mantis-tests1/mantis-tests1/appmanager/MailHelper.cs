@@ -11,8 +11,6 @@ namespace mantis_tests
         }
         public String GetLastMail(AccountData account) 
         {
-          
-            
             for (int i = 0; i < 20; i++)
             {
                 Pop3Client pop3 = new Pop3Client("localhost", 110, account.Name, account.Password, false);
@@ -23,7 +21,8 @@ namespace mantis_tests
                     MailMessage message = pop3.GetMessage(1);
                     string body = message.Body;
                     pop3.DeleteMessage(1);
-                    return message.Body;
+                    pop3.LogOut();
+                    return body;
                 }
                 else
                 {

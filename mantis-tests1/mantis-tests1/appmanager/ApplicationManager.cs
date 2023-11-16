@@ -2,7 +2,7 @@
 using System;
 using OpenQA.Selenium.Chrome;
 using System.Threading;
-
+using OpenQA.Selenium.Internal;
 
 namespace mantis_tests
 {
@@ -13,11 +13,13 @@ namespace mantis_tests
         protected IWebDriver driver;
         protected string baseURL;
 
-        public RegistrationHelper Registration { get; private set; }
-        public FTPHelper FTPHelper { get; private set; }
-        public JamesHelper James { get; private set; }
-        public MailHelper Mail { get; private set; }
-        public LoginHelper Login { get; }
+        public RegistrationHelper Registration { get; set; }
+        public FTPHelper FTPHelper { get; set; }
+        public JamesHelper James { get;  set; }
+        public MailHelper Mail { get; set; }
+        public AdminHelper Admin { get; set; }
+        public APIHelper API { get; private set; }
+        public LoginHelper Login { get; set; }
 
         public ProjectManagementHelper Project { get; }
         public ManagementMenuHelper ManagementMenu { get; set; }
@@ -32,7 +34,7 @@ namespace mantis_tests
             if (!app.IsValueCreated)
             {
                 ApplicationManager newInstance = new ApplicationManager();
-                newInstance.driver.Url = "http://localhost/mantisbt-2.26.0/account_page.php";
+                newInstance.driver.Url = newInstance.baseURL + "/login_page.php";
                 app.Value = newInstance;
             }
             return app.Value;
@@ -41,11 +43,13 @@ namespace mantis_tests
         public ApplicationManager()
         {
             driver = new ChromeDriver();
-            baseURL = "http://localhost";
+            baseURL = "http://localhost/mantisbt-2.26.0";
             Registration = new RegistrationHelper(this);
             FTPHelper = new FTPHelper(this);
             James= new JamesHelper (this);
             Mail = new MailHelper(this);
+            Admin = new AdminHelper(this, baseURL);
+            API = new APIHelper(this);
         }
 
         ~ApplicationManager()

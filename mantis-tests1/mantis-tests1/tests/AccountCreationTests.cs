@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using System.Collections.Generic;
 using System.IO;
 
 namespace mantis_tests
@@ -12,7 +13,7 @@ namespace mantis_tests
         [TestFixtureSetUp]
         public void SetUpConfig()
         {
-            app.FTPHelper.BackupFile("/config_inc.php");
+            app.FTPHelper.BackupFile("config_inc.php");
             using (Stream localFile = File.Open("config_inc.php", FileMode.Open))
             {
                 app.FTPHelper.Upload("/config_inc.php", localFile);
@@ -22,11 +23,19 @@ namespace mantis_tests
         [Test]
         public void TestAccountRegistration()
         {
+              
             AccountData account = new AccountData() {
                 Name = "testuser",
                 Password = "password",
                 Email = "testuser@localhost.localdomain"
             };
+
+            List<AccountData> accounts = app.Admin.GetAllAccounts();
+            AccountData existingAccount = accounts.Find(x => x.Name == account.Name);
+            if (existingAccount != null)
+            {
+                app.Admin.DeleteAccount(existingAccount);
+            }
             app.James.Delete(account);
             app.James.Add(account);
 
