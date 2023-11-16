@@ -231,6 +231,25 @@ namespace WebAddressbookTests
             manager.Navigator.OpenHomePage();
             return driver.FindElements(By.Name("entry")).Count;
         }
+
+        public ContactHelper Removal(ContactData toBeRemoved)
+        {
+            ContactSelection(toBeRemoved.Id);
+            DeteteButton();
+            ClosePopUpwindow();
+            return this;
+        }
+        public ContactHelper ContactSelection(String id)
+        {
+            driver.FindElement(By.XPath("//input[@name='selected[]' and @value='" + id + "']")).Click();
+            return this;
+        }
+        public ContactHelper DeteteButton()
+        {
+            driver.FindElement(By.XPath("//input[@value='Delete']")).Click();
+            return this;
+        }
+
     }
 
 }

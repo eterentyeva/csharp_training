@@ -42,6 +42,10 @@ namespace WebAddressbookTests
             catch { return false; };
 
         }
+        public void ClosePopUpwindow()
+        {
+            driver.SwitchTo().Alert().Accept();
+        }
     }
 
 }
