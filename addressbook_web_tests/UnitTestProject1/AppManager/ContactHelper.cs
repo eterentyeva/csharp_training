@@ -168,6 +168,20 @@ namespace WebAddressbookTests
             Match m = new Regex(@"\d+").Match(text);
             return Int32.Parse(m.Value);
         }
+
+        public ContactHelper Remove(int v)
+        {
+            manager.Navigator.OpenHomePage();
+            SelectContact(v);
+            RemoveContact();
+            CloseAlert();
+            return this;
+        }
+        public ContactHelper CloseAlert()
+        {
+            driver.SwitchTo().Alert().Accept();
+            return this;
+        }
     }
 
 }

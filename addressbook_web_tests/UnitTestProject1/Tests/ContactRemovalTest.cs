@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using System.Collections.Generic;
 using System.Threading;
 
 namespace WebAddressbookTests
@@ -9,12 +10,11 @@ namespace WebAddressbookTests
         [Test]
         public void ContactRemovalTest()
         {
-            app.Navigator.OpenHomePage();
-            if (!app.Contact.IsContactExist())
-                app.Contact.Create(new ContactData("new", "new"));
-            app.Contact
-                .SelectContact(2)
-                .RemoveContact();
+            List<ContactData> oldContacts = app.Contact.GetContactList();
+            app.Contact.Remove(0);
+            List<ContactData> newContacts = app.Contact.GetContactList();
+            oldContacts.RemoveAt(0);
+            Assert.AreEqual(oldContacts, newContacts);
             app.Auth.Logout();
         }
     }
