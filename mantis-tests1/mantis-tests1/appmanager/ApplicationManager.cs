@@ -50,6 +50,7 @@ namespace mantis_tests
             Mail = new MailHelper(this);
             Admin = new AdminHelper(this, baseURL);
             API = new APIHelper(this);
+            Login = new LoginHelper(this);
         }
 
         ~ApplicationManager()
