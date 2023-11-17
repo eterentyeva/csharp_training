@@ -178,8 +178,9 @@ namespace WebAddressbookTests
         public string ReverseGetContactInformationFromEditFormForDetails(int index)
         {
             ContactData contactDatas = GetContactInformationFromEditForm(index);
-            string result =  contactDatas.FirstName + contactDatas.LastName + contactDatas.AllPhones;
-            return Regex.Replace(result, @"[ ]", "");
+            string[] phones = contactDatas.AllPhones.Replace("\r\n", "q").Split('q');
+            return (contactDatas.FirstName + contactDatas.LastName + "\r\n\r\nH:" + phones[0] + "\r\nM:" + phones[1]).Trim();
+
         }
         public int GetNumberOfSearchResults()
         {
