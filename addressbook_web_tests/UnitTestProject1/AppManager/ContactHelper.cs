@@ -9,7 +9,6 @@ namespace WebAddressbookTests
 {
     public class ContactHelper : HelperBase
     {
-        private List<ContactData> contactCashe = null;
         public ContactHelper(ApplicationManager manager) : base(manager)
         {
         }
@@ -50,15 +49,13 @@ namespace WebAddressbookTests
         }
         public ContactHelper SelectContact(int index)
         {
-            driver.FindElement(By.XPath("//*[@id='maintable']/tbody/tr[" + index + "]/td[1]/input")).Click();
-            contactCashe = null;
+            driver.FindElement(By.XPath("//*[@id='maintable']/tbody/tr[" + (index + 1) + "]/td[1]/input")).Click();
             return this;
         }
         public ContactHelper RemoveContact()
         {
             driver.FindElement(By.XPath("//input[@value='Delete']")).Click();
             Assert.IsTrue(Regex.IsMatch(CloseAlertAndGetItsText(), "^Delete 1 addresses[\\s\\S]$"));
-            contactCashe = null;
 
             return this;
         }
@@ -83,15 +80,12 @@ namespace WebAddressbookTests
             SubmitContactModification();
             ReturnToHomePage();
 
-            contactCashe = null;
-
             return this;
         }
 
         private ContactHelper InitContactModification(int v)
         {
             driver.FindElement(By.XPath("(//img[@alt='Edit'])[" + (v + 1) + "]")).Click();
-            contactCashe = null;
             return this;
         }
 
@@ -113,19 +107,17 @@ namespace WebAddressbookTests
         }
         public List<ContactData> GetContactList()
         {
-            if (contactCashe == null)
+            List<ContactData> contacts = new List<ContactData>();
+            manager.Navigator.OpenHomePage();
+            ICollection<IWebElement> entries = driver.FindElements(By.Name("entry"));
+            foreach (IWebElement entry in entries)
             {
-                contactCashe = new List<ContactData>();
-                manager.Navigator.OpenHomePage();
-                ICollection<IWebElement> entries = driver.FindElements(By.Name("entry"));
-                foreach (IWebElement entry in entries)
-                {
-                    string firstName = entry.FindElements(By.TagName("td"))[2].Text;
-                    string lastName = entry.FindElements(By.TagName("td"))[1].Text;
-                    contactCashe.Add(new ContactData(firstName, lastName));
-                }
+                string firstName = entry.FindElements(By.TagName("td"))[2].Text;
+                string lastName = entry.FindElements(By.TagName("td"))[1].Text;
+                contacts.Add(new ContactData(firstName, lastName));
             }
-            return new List<ContactData>(contactCashe);
+            
+            return new List<ContactData>(contacts);
         }
 
         public ContactData GetContactInformationFromTable(int index)
