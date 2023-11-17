@@ -89,11 +89,26 @@ namespace WebAddressbookTests
 
             return this;
         }
+        public ContactHelper Modify(ContactData oldData, ContactData newData)
+        {
+            InitContactModification(oldData.Id);
+            FillingContactPage(newData);
+            SubmitContactModification();
+            ReturnToHomePage();
+
+            return this;
+        }
 
         private ContactHelper InitContactModification(int v)
         {
             driver.FindElement(By.XPath("(//img[@alt='Edit'])[" + (v + 1) + "]")).Click();
             contactCashe = null;
+            return this;
+        }
+
+        public ContactHelper InitContactModification(string id)
+        {
+            driver.FindElement(By.XPath(String.Format("//a[@href='edit.php?id={0}']", id))).Click();
             return this;
         }
 
