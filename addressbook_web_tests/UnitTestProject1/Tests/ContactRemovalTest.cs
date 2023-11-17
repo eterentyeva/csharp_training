@@ -10,7 +10,7 @@ namespace WebAddressbookTests
         public void ContactRemovalTest()
         {
             app.Contact
-                .SelectContact(2)
+                .SelectContact(1)
                 .RemoveContact()
                 .Exit(); 
         }
