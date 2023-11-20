@@ -166,7 +166,6 @@ namespace WebAddressbookTests
             manager.Navigator.OpenHomePage();
             SelectContact(v);
             RemoveContact();
-            CloseAlert();
             return this;
         }
         public ContactHelper CloseAlert()
