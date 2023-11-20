@@ -185,18 +185,6 @@
     </None>
     <None Include="app.config" />
     <None Include="ClassDiagram1.cd" />
-    <None Include="contact.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="groups.csv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="groups.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="groups.xlsx">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Include="LinqToDB.Templates\DataAnnotations.ttinclude" />
     <None Include="LinqToDB.Templates\DataModel.ttinclude" />
     <None Include="LinqToDB.Templates\EditableObject.ttinclude" />
@@ -216,9 +204,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="groups.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="LinqToDB.Templates\CopyMe.MySql.tt.txt" />
   </ItemGroup>
   <ItemGroup>

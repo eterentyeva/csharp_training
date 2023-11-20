@@ -16,8 +16,12 @@ namespace WebAddressbookTests
             app.Contact.ContactExistanceCheck();
             GroupData group = GroupData.GetAll()[0];
             List<ContactData> oldList = group.GetContacts();
-            ContactData contact = ContactData.GetAll().Except(oldList).First();
-            if (contact == null)
+            ContactData contact = new ContactData();
+            try
+            {
+                contact = ContactData.GetAll().Except(oldList).First();
+            }
+            catch
             {
                 contact = new ContactData("new", "new");
                 app.Contact.Create(contact);
