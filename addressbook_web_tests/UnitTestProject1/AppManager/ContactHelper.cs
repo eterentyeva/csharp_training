@@ -4,6 +4,7 @@ using NUnit.Framework;
 using System.Collections.Generic;
 using System;
 using System.Reflection;
+using System.Linq;
 
 namespace WebAddressbookTests
 {
@@ -160,12 +161,14 @@ namespace WebAddressbookTests
             string homePhone = driver.FindElement(By.Name("home")).GetAttribute("value");
             string mobilePhone = driver.FindElement(By.Name("mobile")).GetAttribute("value");
             string workPhone = driver.FindElement(By.Name("work")).GetAttribute("value");
+            string email = driver.FindElement(By.Name("email")).GetAttribute("value");
             return new ContactData(firstName, lastName)
             {
                 Address = address,
                 HomePhone = homePhone,
                 MobilePhone = mobilePhone,
-                WorkPhone = workPhone
+                WorkPhone = workPhone,
+                Email = email
             };
         }
         public string ReverseGetContactInformationFromEditForm(int index)
@@ -178,8 +181,24 @@ namespace WebAddressbookTests
         public string ReverseGetContactInformationFromEditFormForDetails(int index)
         {
             ContactData contactDatas = GetContactInformationFromEditForm(index);
-            string[] phones = contactDatas.AllPhones.Replace("\r\n", "q").Split('q');
-            return (contactDatas.FirstName + contactDatas.LastName + "\r\n\r\nH:" + phones[0] + "\r\nM:" + phones[1]).Trim();
+            string phone = "";
+            string[] phones = new string[3] { "","",""};
+            string email = "";
+            if (contactDatas.AllPhones != "")
+            {
+                phone += "\r\n";
+                if (contactDatas.HomePhone!="")
+                    phone += "\r\nH:" + contactDatas.HomePhone;
+                if (contactDatas.MobilePhone != "")
+                    phone += "\r\nM:" + contactDatas.MobilePhone;
+                if (contactDatas.WorkPhone != "")
+                    phone += "\r\nW:" + contactDatas.WorkPhone;
+            }
+            if (contactDatas.Email != "")
+            {
+                email = "\r\n\r\n" + contactDatas.Email;
+            }
+            return (contactDatas.FirstName + contactDatas.LastName + phone + email).Trim();
 
         }
         public int GetNumberOfSearchResults()

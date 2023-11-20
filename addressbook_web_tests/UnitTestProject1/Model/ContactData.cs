@@ -38,6 +38,7 @@ namespace WebAddressbookTests
                 allPhones = value;
             }
         }
+        public string Email { get; set; }
         private string CleanUp(string phone)
         {
             if (phone == null || phone == "")
