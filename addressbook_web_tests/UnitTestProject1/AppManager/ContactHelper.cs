@@ -198,7 +198,7 @@ namespace WebAddressbookTests
             {
                 email = "\r\n\r\n" + contactDatas.Email;
             }
-            return (contactDatas.FirstName + contactDatas.LastName + phone + email).Trim();
+            return (contactDatas.FirstName + contactDatas.LastName + phone + email);
 
         }
         public int GetNumberOfSearchResults()
