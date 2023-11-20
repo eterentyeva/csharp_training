@@ -41,7 +41,7 @@ namespace mantis_tests
 
         public void CreateProjectForRemove(AccountData account, ProjectData project)
         {
-            mantis_tests1.Mantis.MantisConnectPortTypeClient client = new mantis_tests1.Mantis.MantisConnectPortTypeClient.MantisConnectPortTypeClient();
+            mantis_tests1.Mantis.MantisConnectPortTypeClient client = new mantis_tests1.Mantis.MantisConnectPortTypeClient();
             mantis_tests1.Mantis.ProjectData addedProject = new mantis_tests1.Mantis.ProjectData();
             addedProject.name = project.Name;
             addedProject.description = project.Description;

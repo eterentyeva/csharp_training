@@ -13,7 +13,7 @@ namespace mantis_tests
         [TestFixtureSetUp]
         public void SetUpConfig()
         {
-            app.FTPHelper.BackupFile("config_inc.php");
+            app.FTPHelper.BackupFile("C:/Users/User/source/repos/csharp_training/mantis-tests1/mantis-tests1/config_inc.php");
             using (Stream localFile = File.Open("config_inc.php", FileMode.Open))
             {
                 app.FTPHelper.Upload("/config_inc.php", localFile);
@@ -23,7 +23,6 @@ namespace mantis_tests
         [Test]
         public void TestAccountRegistration()
         {
-              
             AccountData account = new AccountData() {
                 Name = "testuser",
                 Password = "password",

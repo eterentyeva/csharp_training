@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Text.RegularExpressions;
+using OpenQA.Selenium.Chrome;
 
 namespace mantis_tests
 {
@@ -52,7 +53,7 @@ namespace mantis_tests
 
         private IWebDriver OpenAppAndLogin()
         {
-            IWebDriver driver = new SimpleBrowserDriver();
+            IWebDriver driver = new ChromeDriver();
             driver.Url = baseURL + "/login_page.php";
             driver.FindElement(By.Name("username")).SendKeys(adminLogin.Name);
             driver.FindElement(By.Name("password")).SendKeys(adminLogin.Password);

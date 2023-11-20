@@ -21,7 +21,7 @@ namespace mantis_tests
         }
         public void BackupFile(String path) 
         {
-            String backupPath = path;
+            String backupPath = path + ".bak";
             if (client.FileExists(backupPath))
             {
                 return;
