@@ -83,6 +83,11 @@ namespace WebAddressbookTests
             else return FirstName.CompareTo(other.FirstName);
         }
 
+        public override int GetHashCode()
+        {
+            return (FirstName + LastName).GetHashCode();
+        }
+
         public static List<ContactData> GetAll()
         {
             using (AddressbookDB db = new AddressbookDB())
