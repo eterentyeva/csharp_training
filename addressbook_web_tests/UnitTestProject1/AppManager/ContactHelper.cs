@@ -188,17 +188,17 @@ namespace WebAddressbookTests
             {
                 phone += "\r\n";
                 if (contactDatas.HomePhone!="")
-                    phone += "\r\nH:" + contactDatas.HomePhone;
+                    phone += "\r\nH: " + contactDatas.HomePhone;
                 if (contactDatas.MobilePhone != "")
-                    phone += "\r\nM:" + contactDatas.MobilePhone;
+                    phone += "\r\nM: " + contactDatas.MobilePhone;
                 if (contactDatas.WorkPhone != "")
-                    phone += "\r\nW:" + contactDatas.WorkPhone;
+                    phone += "\r\nW: " + contactDatas.WorkPhone;
             }
             if (contactDatas.Email != "")
             {
                 email = "\r\n\r\n" + contactDatas.Email;
             }
-            return (contactDatas.FirstName + contactDatas.LastName + phone + email);
+            return (contactDatas.FirstName +" " + contactDatas.LastName + phone + email);
 
         }
         public int GetNumberOfSearchResults()
@@ -214,7 +214,7 @@ namespace WebAddressbookTests
             manager.Navigator.OpenHomePage();
             driver.FindElement(By.XPath("(//img[@alt='Details'])[" + (index + 1) + "]")).Click();
             IWebElement contactData = driver.FindElement(By.Id("content"));
-            return Regex.Replace(contactData.Text, @"[ ]", "");
+            return contactData.Text;
         }
     }
 
