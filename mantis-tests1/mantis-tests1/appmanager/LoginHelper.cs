@@ -41,7 +41,7 @@ namespace mantis_tests
 
         private void OpenMainPage()
         {
-            driver.Url = "http://localhost:8080/mantisbt-2.26.0";
+            driver.Url = "http://localhost/mantisbt-2.26.0";
         }
 
         public void LoginAsAdministrator()
