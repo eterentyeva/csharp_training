@@ -91,7 +91,7 @@ namespace mantis_tests
         }
         public void InitCteateProject()
         {
-            driver.FindElement(By.XPath("//input[@value='Create New Project']")).Click();
+            driver.FindElement(By.XPath("//button[@class='btn btn-primary btn-white btn-round']")).Click();
         }
 
         public void FillProjectForm(ProjectData project)
@@ -102,7 +102,7 @@ namespace mantis_tests
 
         public void SubmitCreation()
         {
-            driver.FindElement(By.XPath("//input[@value='Add Project']")).Click();
+            driver.FindElement(By.XPath("//input[@value='Добавить проект']")).Click();
         }
 
         public void ProjectExistanceCheck(AccountData account)
@@ -115,7 +115,7 @@ namespace mantis_tests
                     Description = "AutoDescription"
                 };
                 manager.API.CreateProjectForRemove(account, project);
-                manager.Driver.Url = "http://localhost/mantisbt-2.4.1/manage_proj_page.php";
+                manager.Driver.Url = "http://localhost/mantisbt-2.26.0/manage_proj_page.php";
             };
         }
 
@@ -126,12 +126,12 @@ namespace mantis_tests
 
         public void InitDeleteProject()
         {
-            driver.FindElement(By.XPath("//input[@value='Delete Project']")).Click();
+            driver.FindElement(By.XPath("//button[.=Удалить проект")).Click();
         }
 
         public void SubmitRemoval()
         {
-            driver.FindElement(By.XPath("//input[@value='Delete Project']")).Click();
+            driver.FindElement(By.XPath("//button[.=Удалить проект")).Click();
         }
     }
 }

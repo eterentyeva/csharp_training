@@ -51,6 +51,8 @@ namespace mantis_tests
             Admin = new AdminHelper(this, baseURL);
             API = new APIHelper(this);
             Login = new LoginHelper(this);
+            ManagementMenu = new ManagementMenuHelper(this);
+            Project = new ProjectManagementHelper(this);
         }
 
         ~ApplicationManager()

@@ -27,12 +27,12 @@ namespace mantis_tests
 
         public void OpenManagePage()
         {
-            manager.Driver.Url = "http://localhost/mantisbt-2.4.1/manage_overview_page.php";
+            manager.Driver.Url = "http://localhost/mantisbt-2.26.0/manage_overview_page.php";
         }
 
         public void GoToProjectsPage()
         {
-            driver.FindElement(By.LinkText("Manage Projects")).Click();
+            driver.FindElement(By.LinkText("Проекты")).Click();
         }
         public void GoToManagePage()
         {

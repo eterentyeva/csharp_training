@@ -29,6 +29,7 @@ namespace mantis_tests
                 Description = "some long text",
                 Catergory = "General"
             };
+            app.Login.Login(account);
             app.API.CreateNewIssue(account, project, issue);
 
         }
