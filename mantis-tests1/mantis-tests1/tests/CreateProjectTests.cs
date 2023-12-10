@@ -21,12 +21,13 @@ namespace mantis_tests
             };
             ProjectData project = new ProjectData()
             {
-                Name = "ProjectName",
-                Description = "Description"
+                Name = app.Project.GenerateRandomString(),
+                Description = app.Project.GenerateRandomString()
             };
             app.Login.Login(account);
             app.ManagementMenu.MenuProjects();
             List<ProjectData> oldProjects = app.API.GetProjects(account);
+
             app.Project.CreateProject(project);
             List<ProjectData> newProjects = app.API.GetProjects(account);
             oldProjects.Add(project);

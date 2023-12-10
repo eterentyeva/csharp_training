@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace mantis_tests
 {
-    public class ProjectData
+    public class ProjectData: IComparable<ProjectData>, IEquatable<ProjectData>
     {
         public ProjectData() { }
         public ProjectData(string name, string description)
